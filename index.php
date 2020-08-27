@@ -72,6 +72,9 @@ function random_quotes_register_block() {
 		'editor_script' => 'random-quotes',
 		'render_callback' => 'random_quotes_dynamic_render_callback'
 	) );
+	if ( function_exists( 'wp_set_script_translations' ) ) {
+		wp_set_script_translations( 'random-quotes', 'random-quotes' );
+	}
 
 }
 add_action( 'init', 'random_quotes_register_block' );
