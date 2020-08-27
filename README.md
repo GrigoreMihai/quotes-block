@@ -1,3 +1,6 @@
 # quotes-block
-Wordpress gutenberg block plugin that displays random quotes every time the page is opened </br>
-Tags: gutenberg, block, quotes
+Wordpress gutenberg block plugin that displays random quotes every time the page is opened, just add the block everywere on the page is that easy </br>
+
+Tags: gutenberg, block, quotes </br>
+
+https://www.loom.com/share/03979422786c4b4dbb08edbccb47cf04
