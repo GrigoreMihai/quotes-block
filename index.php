@@ -6,8 +6,12 @@
  * Description: This is a plugin adding a custom block for displaying random quotes on the page
  * Version: 1.0.0
  * Author: Grigore Mihai
- *
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * WordPress Available:  yes
+ * Requires License:    no
  */
+
 
 /**
  *  Calls the api and renders the dynamic content of the card
@@ -26,11 +30,18 @@ function random_quotes_dynamic_render_callback( $block_attributes, $content ) {
 		 <blockquote class="random-quotes-blockquote"><p>“%1$s”
 		 </p><cite>%2$s</cite></blockquote>
 		</div>',
-		$quote['content'] ? $quote['content'] : 'The meaning I picked, the one that changed my life: Overcome fear, behold wonder.',
+		$quote['content'] ? $quote['content'] : __( 'The meaning I picked, the one that changed my life: Overcome fear, behold wonder.', 'random-quotes' ),
 		$quote['author'] ? $quote['author'] : 'Richard Bach'
 	);
 }
+/**
+ * Load all translations for our plugin from the MO file.
+ */
+add_action( 'init', 'random_quotes_load_textdomain' );
 
+function random_quotes_load_textdomain() {
+	load_plugin_textdomain( 'random-quotes', false, basename( __DIR__ ) . '/languages' );
+}
 
 
 /**

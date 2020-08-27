@@ -9,8 +9,8 @@ registerBlockType( 'random-quotes/random-quotes', {
 	edit() {
 		return (
 			<div>
-				<blockquote class="random-quotes-blockquote"><p>“A new random quote will be displayed here for every visitor (this is an example)”
-				</p><cite>Author name</cite></blockquote>
+				<blockquote class="random-quotes-blockquote"><p>“{__( 'A new random quote will be displayed here for every visitor (this is an example)', 'random-quotes' )}”
+				</p><cite>{__( 'Author name', 'random-quotes' )}</cite></blockquote>
 			</div>
 		);
 	}
