@@ -6,6 +6,8 @@
  * Description: This is a plugin adding a custom block for displaying random quotes on the page
  * Version: 1.0.0
  * Author: Grigore Mihai
+ * Text Domain:       random-quotes-generator
+ * Domain Path:       /languages
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * WordPress Available:  yes
@@ -17,7 +19,7 @@
  *  Calls the api and renders the dynamic content of the card
  *
  */
-function random_quotes_dynamic_render_callback( $block_attributes, $content ) {
+function random_quotes_generator_dynamic_render_callback( $block_attributes, $content ) {
 	$response = wp_remote_get( 'https://api.quotable.io/random' );
 	$quote = false;
 
@@ -37,10 +39,10 @@ function random_quotes_dynamic_render_callback( $block_attributes, $content ) {
 /**
  * Load all translations for our plugin from the MO file.
  */
-add_action( 'init', 'random_quotes_load_textdomain' );
+add_action( 'init', 'random_quotes_generator_load_textdomain' );
 
-function random_quotes_load_textdomain() {
-	load_plugin_textdomain( 'random-quotes', false, basename( __DIR__ ) . '/languages' );
+function random_quotes_generator_load_textdomain() {
+	load_plugin_textdomain( 'random-quotes-generator', false, basename( __DIR__ ) . '/languages' );
 }
 
 
@@ -49,32 +51,32 @@ function random_quotes_load_textdomain() {
  * the corresponding context.
  *
  */
-function random_quotes_register_block() {
+function random_quotes_generator_register_block() {
 
 	// automatically load dependencies and version
 	$asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
 	wp_register_script(
-		'random-quotes',
+		'random-quotes-generator',
 		plugins_url( 'build/index.js', __FILE__ ),
 		$asset_file['dependencies'],
 		$asset_file['version']
 	);
 
 	wp_register_style(
-		'random-quotes',
+		'random-quotes-generator',
 		plugins_url( 'style.css', __FILE__ ),
 		array( ),
 		filemtime( plugin_dir_path( __FILE__ ) . 'style.css' )
 	);
 
-	register_block_type( 'random-quotes/random-quotes', array(
-		'style' => 'random-quotes',
-		'editor_script' => 'random-quotes',
-		'render_callback' => 'random_quotes_dynamic_render_callback'
+	register_block_type( 'random-quotes-generator/random-quotes', array(
+		'style' => 'random-quotes-generator',
+		'editor_script' => 'random-quotes-generator',
+		'render_callback' => 'random_quotes_generator_dynamic_render_callback'
 	) );
 	if ( function_exists( 'wp_set_script_translations' ) ) {
-		wp_set_script_translations( 'random-quotes', 'random-quotes' );
+		wp_set_script_translations( 'random-quotes-generator', 'random-quotes-generator' );
 	}
 
 }
-add_action( 'init', 'random_quotes_register_block' );
+add_action( 'init', 'random_quotes_generator_register_block' );
